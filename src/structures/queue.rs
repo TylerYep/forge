@@ -1,5 +1,3 @@
-use std::vec::Vec;
-
 #[derive(Debug)]
 pub struct Queue<T: Clone> {
     queue: Vec<T>,
@@ -7,7 +5,7 @@ pub struct Queue<T: Clone> {
 
 impl<T: Clone> Queue<T> {
     pub fn new() -> Queue<T> {
-        Queue { queue: Vec::new() }
+        Queue { queue: vec![] }
     }
 
     pub fn enqueue(&mut self, value: T) {
@@ -42,4 +40,19 @@ impl<T: Clone> Default for Queue<T> {
     fn default() -> Queue<T> {
         Queue::new()
     }
+}
+
+#[macro_export]
+macro_rules! queue {
+    () => { Queue::new() };
+    ($($x:expr),+) => {
+        {
+            use forge::structures::Queue;
+            let mut temp_q = Queue::default();
+            $(
+                let _ = temp_q.enqueue($x);
+            )*
+            temp_q
+        }
+    };
 }

@@ -1,14 +1,15 @@
+use forge::queue;
 use forge::structures::Queue;
 
 #[test]
-fn test_enqueue() {
+fn enqueue() {
     let mut queue: Queue<u8> = Queue::new();
     queue.enqueue(64);
     assert_eq!(queue.is_empty(), false);
 }
 
 #[test]
-fn test_dequeue() {
+fn dequeue() {
     let mut queue: Queue<u8> = Queue::new();
     queue.enqueue(32);
     queue.enqueue(64);
@@ -16,7 +17,7 @@ fn test_dequeue() {
 }
 
 #[test]
-fn test_peek() {
+fn peek() {
     let mut queue: Queue<u8> = Queue::new();
     queue.enqueue(8);
     queue.enqueue(16);
@@ -24,9 +25,17 @@ fn test_peek() {
 }
 
 #[test]
-fn test_size() {
+fn size() {
     let mut queue: Queue<u8> = Queue::new();
     queue.enqueue(8);
     queue.enqueue(16);
-    assert_eq!(2, queue.len());
+    assert_eq!(queue.len(), 2);
+}
+
+#[test]
+fn queue_macro() {
+    let mut queue = queue![17, 1, 5];
+    queue.enqueue(8);
+    queue.enqueue(16);
+    assert_eq!(queue.len(), 5);
 }
