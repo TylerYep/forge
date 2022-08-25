@@ -6,9 +6,9 @@ pub fn binary_search<T: Ord>(item: &T, arr: &[T]) -> Option<usize> {
     while low < high {
         let mid = low + (high - low) / 2;
         match item.cmp(&arr[mid]) {
-            Ordering::Less => high = mid,
             Ordering::Equal => return Some(mid),
             Ordering::Greater => low = mid + 1,
+            Ordering::Less => high = mid,
         }
     }
     None

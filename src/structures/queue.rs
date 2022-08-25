@@ -4,7 +4,7 @@ pub struct Queue<T: Clone> {
 }
 
 impl<T: Clone> Queue<T> {
-    pub fn new() -> Queue<T> {
+    pub fn new() -> Self {
         Queue { queue: vec![] }
     }
 
@@ -37,7 +37,7 @@ impl<T: Clone> Queue<T> {
 }
 
 impl<T: Clone> Default for Queue<T> {
-    fn default() -> Queue<T> {
+    fn default() -> Self {
         Queue::new()
     }
 }
